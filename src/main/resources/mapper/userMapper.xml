@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ws.ch4.dao.userMapper">
+
+    <!-- 회원데이터 가져오기 -->
+    <select id="selectUser" parameterType="String" resultType="UserDto">
+        select * from user_info where id = #{id}
+    </select>
+
+    <!-- 회원탈퇴 -->
+    <delete id="deleteUser" parameterType="String">
+        DELETE FROM user_info WHERE id = #{id}
+    </delete>
+
+    <!-- 회원 가입 -->
+    <insert id="insertUser" parameterType="UserDto">
+        INSERT INTO user_info
+        VALUES ( #{id}, #{pwd}, #{name}, #{email}, #{birth}, now())
+    </insert>
+
+    <!-- 업데이트 -->
+    <update id="updateUser" parameterType="UserDto">
+        UPDATE user_info
+        SET   pwd = #{pwd}
+          , name = #{name}
+          , email = #{email}
+          , birth = #{birth}
+        WHERE id = #{id}
+    </update>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM user_info
+    </select>
+
+    <delete id="deleteAll">
+        DELETE FROM user_info
+    </delete>
+
+    <!-- 아이디 중복체크 -->
+    <select id="id_check" parameterType="String" resultType="int">
+        select count(id) from user_info where id = #{id}
+    </select>
+
+    <!-- 이메일 중복체크 -->
+    <select id="email_check" parameterType="String" resultType="int">
+        select count(email) from user_info where email = #{email}
+    </select>
+
+</mapper>

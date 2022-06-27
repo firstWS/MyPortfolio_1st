@@ -11,7 +11,6 @@ import com.ws.ch4.dao.*;
 import com.ws.ch4.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,17 +21,17 @@ public class LoginController {
     @Autowired
     UserDao userDao;
 
-    @GetMapping("/login")
-    public String loginForm() {
-        return "loginForm";
-    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         // 1. 세션을 종료
         session.invalidate();
         // 2. 홈으로 이동
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String loginForm() {
+        return "loginForm";
     }
 
     @PostMapping("/login")
@@ -71,7 +70,7 @@ public class LoginController {
     }
 
     private boolean loginCheck(String id, String pwd) {
-        User user = null;
+        UserDto user = null;
 
         try {
             user = userDao.selectUser(id);

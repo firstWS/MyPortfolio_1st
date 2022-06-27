@@ -16,6 +16,16 @@ public class SimpleRestController {
         return "test";
     }
 
+//    @GetMapping("/registerForm")
+//    public String registerForm() {
+//        return "registerForm";
+//    }
+//
+//    @PostMapping("/registerInfo")
+//    public String registerInfo() {
+//        return "registerInfo";
+//    }
+
 //    @PostMapping("/send")
 //    @ResponseBody
 //    public Person test(@RequestBody Person p) {
